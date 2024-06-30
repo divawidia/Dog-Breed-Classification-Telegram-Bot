@@ -1,6 +1,6 @@
 import logging
 import requests
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove,ReplyKeyboardMarkup, Update
+from telegram import ReplyKeyboardRemove,ReplyKeyboardMarkup, Update
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -8,7 +8,6 @@ from telegram.ext import (
     ConversationHandler,
     MessageHandler,
     filters,
-    CallbackQueryHandler
 )
 import os
 
@@ -22,9 +21,6 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 PREDICT, BREED_ROUTE, END_ROUTE = range(3)
-
-# IYA,TIDAK = range(2)
-
 reply_keyboard = [["Iyaa", "Ngga dulu deh"]]
 
 # URL_LOCALHOST = "http://127.0.0.1:5000"
@@ -143,7 +139,7 @@ async def end(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     )
     return ConversationHandler.END
 
-telegram_bot_token = "1875996906:AAGqrhz5kHMNOv_JBksWY4GBwkfIMmr4VCA"
+telegram_bot_token = str(os.environ.get("TELEGRAM_BOT_TOKEN"))
 
 def main() -> None:
     """Run the bot."""
@@ -171,7 +167,6 @@ def main() -> None:
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling(allowed_updates=Update.ALL_TYPES)
-
 
 if __name__ == "__main__":
     main()
