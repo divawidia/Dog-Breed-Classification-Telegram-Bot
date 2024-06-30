@@ -146,7 +146,7 @@ telegram_bot_token = str(os.environ.get("TELEGRAM_BOT_TOKEN"))
 
 def main() -> None:
     """Run the bot."""
-    application = Application.builder().token(telegram_bot_token).build()
+    application = Application.builder().token(telegram_bot_token).read_timeout(30).write_timeout(30).build()
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
