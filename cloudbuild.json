@@ -22,7 +22,7 @@
         "args": [
             "run",
             "deploy",
-            "dog-breed-classifier-telegram_bot",
+            "dog-breed-classifier-telegram-bot",
             "--image",
             "gcr.io/$PROJECT_ID/dog-breed-classifier-telegram_bot:$COMMIT_SHA",
             "--region",
