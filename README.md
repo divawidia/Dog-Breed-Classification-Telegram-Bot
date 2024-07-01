@@ -5,13 +5,12 @@ For more detailed app description and deep learning model used for chatbot, can 
 You can try this bot by cliking this [link](https://t.me/deteksi_hewan_bot)
 
 - Screenshot
-<p align="center">
+
 	<a href="https://ibb.co.com/P5RQNB6"><img src="https://i.ibb.co.com/FB9VKGD/Screenshot-2024-07-01-11-46-49-402-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-46-49-402-org-telegram-messenger" border="0" height="600"></a>
 	<a href="https://ibb.co.com/X2q7jHc"><img src="https://i.ibb.co.com/6nkHrQj/Screenshot-2024-07-01-11-47-17-477-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-47-17-477-org-telegram-messenger" border="0" height="600"></a>
 	<a href="https://ibb.co.com/wLTK78f"><img src="https://i.ibb.co.com/H20rCRj/Screenshot-2024-07-01-11-48-00-003-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-48-00-003-org-telegram-messenger" border="0" height="600"></a>
 	<a href="https://ibb.co.com/jhJqmmY"><img src="https://i.ibb.co.com/CBP4ggy/Screenshot-2024-07-01-11-48-05-545-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-48-05-545-org-telegram-messenger" border="0" height="600"></a>
 	<a href="https://ibb.co.com/tMwcnBr"><img src="https://i.ibb.co.com/HDLYR78/Screenshot-2024-07-01-11-49-51-602-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-49-51-602-org-telegram-messenger" border="0" height="600"></a>
-</p>
 ## Techstack
 
 <p align="center">
