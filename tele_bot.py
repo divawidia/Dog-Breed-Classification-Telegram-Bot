@@ -25,6 +25,7 @@ logger = logging.getLogger(__name__)
 
 PREDICT, BREED_ROUTE, END_ROUTE = range(3)
 reply_keyboard = [["Iyaa", "Ngga dulu deh"]]
+input_text_validation="Tolong balas dengan tombol 'Iyaa' atau 'Ngga dulu deh' pada keyboard!"
 
 # URL_LOCALHOST = "http://127.0.0.1:5000"
 URL_HOSTED = "https://dog-breed-classifier-api-7zz24sawna-et.a.run.app"
@@ -133,6 +134,33 @@ async def end_confirmation(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
     return END_ROUTE
 
+async def input_validation_breed(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    await update.message.reply_text(
+        text=input_text_validation, 
+        reply_markup=ReplyKeyboardMarkup(
+            reply_keyboard, one_time_keyboard=True, input_field_placeholder="Iya atau Tidak?"
+        ),
+    )
+
+    return BREED_ROUTE
+
+async def input_validation_end(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    await update.message.reply_text(
+        text=input_text_validation, 
+        reply_markup=ReplyKeyboardMarkup(
+            reply_keyboard, one_time_keyboard=True, input_field_placeholder="Iya atau Tidak?"
+        ),
+    )
+
+    return END_ROUTE
+
+async def input_validation_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    await update.message.reply_text(
+        text="Tolong kirim foto yang berisi foto anjing dengan jelas!"
+    )
+
+    return PREDICT
+
 async def end(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user = update.message.from_user
     logger.info("User %s ended the conversation.", user.first_name)
@@ -152,15 +180,18 @@ def main() -> None:
         entry_points=[CommandHandler("start", start)],
         states={
             PREDICT: [
-                MessageHandler(filters.PHOTO, predict)
+                MessageHandler(filters.PHOTO, predict),
+                MessageHandler(filters.TEXT, input_validation_photo)
             ],
             BREED_ROUTE: [
                 MessageHandler(filters.Regex("^(Iyaa)$"), breed_detail),
                 MessageHandler(filters.Regex("^(Ngga dulu deh)$"), end_confirmation),
+                MessageHandler(filters.Regex("^((?!Iyaa|Ngga dulu deh).)*$"), input_validation_breed),
             ],
             END_ROUTE: [
                 MessageHandler(filters.Regex("^(Iyaa)$"), start_over),
                 MessageHandler(filters.Regex("^(Ngga dulu deh)$"), end),
+                MessageHandler(filters.Regex("^((?!Iyaa|Ngga dulu deh).)*$"), input_validation_end)
             ]
         },
         fallbacks=[CommandHandler("end", end)],
