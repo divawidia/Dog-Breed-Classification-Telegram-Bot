@@ -1,8 +1,15 @@
 # Dog Breed Classifier Telegram Bot
 Telegram bot to help you classify/know what dog breed from uploaded image/photo, and help you to give more information about the dog breed.
-This backend app (include deployment of deep learning model) was created using Flask framework. 
+The dog breed classification method is using API from this [repositry](https://github.com/divawidia/dog-breed-classification-api). 
 For more detailed app description and deep learning model used for chatbot, can be seen [here](https://github.com/divawidia/Dog-Breed-Classification-Telegram-Bot)
+You can try this bot by cliking this [link](https://t.me/deteksi_hewan_bot)
 
+- Screenshot
+    <a href="https://ibb.co.com/P5RQNB6"><img src="https://i.ibb.co.com/P5RQNB6/Screenshot-2024-07-01-11-46-49-402-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-46-49-402-org-telegram-messenger" border="0"></a> 
+    <a href="https://ibb.co.com/X2q7jHc"><img src="https://i.ibb.co.com/X2q7jHc/Screenshot-2024-07-01-11-47-17-477-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-47-17-477-org-telegram-messenger" border="0"></a> 
+    <a href="https://ibb.co.com/wLTK78f"><img src="https://i.ibb.co.com/wLTK78f/Screenshot-2024-07-01-11-48-00-003-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-48-00-003-org-telegram-messenger" border="0"></a> 
+    <a href="https://ibb.co.com/jhJqmmY"><img src="https://i.ibb.co.com/jhJqmmY/Screenshot-2024-07-01-11-48-05-545-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-48-05-545-org-telegram-messenger" border="0"></a> 
+    <a href="https://ibb.co.com/tMwcnBr"><img src="https://i.ibb.co.com/tMwcnBr/Screenshot-2024-07-01-11-49-51-602-org-telegram-messenger.jpg" alt="Screenshot-2024-07-01-11-49-51-602-org-telegram-messenger" border="0"></a>
 ## Techstack
 
 <p align="center">
@@ -13,16 +20,16 @@ For more detailed app description and deep learning model used for chatbot, can 
 
 ## Features
 * Classify dog breed by uploading image
-* Using CNN with Resnet50 transfer learning trained on dog breed dataset to classify dog breed
 * Retrieve dog breed detail data based on dog breed name
 
 ## Installation
-1. Clone this repository:
+1. First, head over to [BotFather](https://t.me/BotFather) and create your own telegram bot with the `/newbot` command. After choosing an appropriate name and telegram handle for your bot, note down the **bot token** provided to you.
+2. Clone this repository:
 
 	```
 	$ git clone https://github.com/divawidia/dog-breed-classification-api.git
 	```
-2. Virtual Environment Setup:
+3. Virtual Environment Setup:
     It is preferred to create a virtual environment per project, rather then installing all dependencies of each of your 
     projects system wide. Once you install [virtual env](https://virtualenv.pypa.io/en/stable/installation/), and move to 
     your projects directory through your terminal, you can set up a virtual env with:
@@ -30,7 +37,7 @@ For more detailed app description and deep learning model used for chatbot, can 
     ```bash
     python3 -m venv .venv
     ```
-3. Activate the Virtual Environment
+4. Activate the Virtual Environment
     * In Linux:
 
     ```bash
@@ -42,44 +49,23 @@ For more detailed app description and deep learning model used for chatbot, can 
     ```bash
     venv/Scripts/activate
     ```
-3. Install the Required Packages:
+5. Install the Required Packages:
 
     ```bash
     pip3 install -r requirements.txt
     ```
-4. Copy the .env.example file and Rename to .env
-    After copy and rename the file to .env, fill the required environment variables such as:
-    * DB_HOST = 
-    * DB_CLUSTER = 
-    * DB_USERNAME = 
-    * DB_PASSWORD = 
-5. Set Up the Database
-    First you need to create the cluster manually in your mongodb atlas/localhost.
-    Match the cluster name that has been created in the DB_DATABASE variable in .env file with the database created on the mongodb atlas/localhost.
+6. Copy the .env.example file and Rename to .env
+    After copy and rename the file to .env, fill the TELEGRAM_BOT_TOKEN variable with your bot token:
+    * TELEGRAM_BOT_TOKEN = 
     
-    To setup a MongoDB migration, you need to run:
-    ```bash
-    python database/migrate.py
-    ```
 6. Running the Application
 
-    Once you have setup your database, you are ready to run the application.
+    Once you have setup your bot token, you are ready to run the bot.
     You can go ahead and run the application with a simple command:
 
     ```bash
-    flask run
-    ```
-7. Go to the swagger api documentation
-    Once you have run your flask app , you can go to the swagger api documentation by enter this url:
-
-    ```bash
-    http://127.0.0.1:5000/api/v1/docs
+    python3 tele_bot.py
     ```
 
 ## Deployment
-If you want to deploy this application to GCP Environment, you can follow this [tutorial](https://youtu.be/LRJX8hvQ6oQ?si=ED0mv_e--rZNxlsn)
-
-## API Documentation
-The API documentation of the Teman Ngorte Chatbot application can be seen in the following Swagger API documentation, you can try out the API by clicking the button bellow :
-
-[![View in Swagger](https://jessemillar.github.io/view-in-swagger-button/button.svg)](https://dog-breed-classifier-api-7zz24sawna-et.a.run.app/api/v1/docs/)
+If you want to deploy this bot, you can follow this [tutorial](https://tjtanjin.medium.com/how-to-host-a-telegram-bot-on-ubuntu-a-step-by-step-guide-a38fb8c04f72)
