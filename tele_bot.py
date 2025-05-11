@@ -1,5 +1,8 @@
 import logging
 import requests
+
+from flask import Flask, request
+
 from telegram import ReplyKeyboardRemove,ReplyKeyboardMarkup, Update
 from telegram.ext import (
     Application,
@@ -20,15 +23,18 @@ logging.basicConfig(
 )
 # set higher logging level for httpx to avoid all GET and POST requests being logged
 logging.getLogger("httpx").setLevel(logging.WARNING)
-
 logger = logging.getLogger(__name__)
 
+# Conversation states
 PREDICT, BREED_ROUTE, END_ROUTE = range(3)
 reply_keyboard = [["Iyaa", "Ngga dulu deh"]]
 input_text_validation="Tolong balas dengan tombol 'Iyaa' atau 'Ngga dulu deh' pada keyboard!"
 
 # URL_LOCALHOST = "http://127.0.0.1:5000"
 URL_HOSTED = "https://dog-breed-classifier-api-7zz24sawna-et.a.run.app"
+
+# Flask app
+app = Flask(__name__)
 
 def query_predict_breed(filename):
     API_URL = f"{URL_HOSTED}/api/v1/predict"
@@ -172,35 +178,45 @@ async def end(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 telegram_bot_token = str(os.environ.get("TELEGRAM_BOT_TOKEN"))
 
-def main() -> None:
-    """Run the bot."""
-    application = Application.builder().token(telegram_bot_token).read_timeout(30).write_timeout(30).build()
+# Build the application
+application = Application.builder().token(telegram_bot_token).read_timeout(30).write_timeout(30).build()
 
-    conv_handler = ConversationHandler(
-        entry_points=[CommandHandler("start", start)],
-        states={
-            PREDICT: [
-                MessageHandler(filters.PHOTO, predict),
-                MessageHandler(filters.TEXT, input_validation_photo)
-            ],
-            BREED_ROUTE: [
-                MessageHandler(filters.Regex("^(Iyaa)$"), breed_detail),
-                MessageHandler(filters.Regex("^(Ngga dulu deh)$"), end_confirmation),
-                MessageHandler(filters.Regex("^((?!Iyaa|Ngga dulu deh).)*$"), input_validation_breed),
-            ],
-            END_ROUTE: [
-                MessageHandler(filters.Regex("^(Iyaa)$"), start_over),
-                MessageHandler(filters.Regex("^(Ngga dulu deh)$"), end),
-                MessageHandler(filters.Regex("^((?!Iyaa|Ngga dulu deh).)*$"), input_validation_end)
-            ]
-        },
-        fallbacks=[CommandHandler("end", end)],
-    )
+conv_handler = ConversationHandler(
+    entry_points=[CommandHandler("start", start)],
+    states={
+        PREDICT: [
+            MessageHandler(filters.PHOTO, predict),
+            MessageHandler(filters.TEXT, input_validation_photo)
+        ],
+        BREED_ROUTE: [
+            MessageHandler(filters.Regex("^(Iyaa)$"), breed_detail),
+            MessageHandler(filters.Regex("^(Ngga dulu deh)$"), end_confirmation),
+            MessageHandler(filters.Regex("^((?!Iyaa|Ngga dulu deh).)*$"), input_validation_breed),
+        ],
+        END_ROUTE: [
+            MessageHandler(filters.Regex("^(Iyaa)$"), start_over),
+            MessageHandler(filters.Regex("^(Ngga dulu deh)$"), end),
+            MessageHandler(filters.Regex("^((?!Iyaa|Ngga dulu deh).)*$"), input_validation_end)
+        ]
+    },
+    fallbacks=[CommandHandler("end", end)],
+)
 
-    application.add_handler(conv_handler)
+application.add_handler(conv_handler)
 
-    # Run the bot until the user presses Ctrl-C
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
+# Run the bot until the user presses Ctrl-C
+application.run_polling(allowed_updates=Update.ALL_TYPES)
 
+# Flask webhook endpoint
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    return application.webhook_update(request)
+
+# For local testing (optional)
 if __name__ == "__main__":
-    main()
+    # Set your webhook URL here if running locally and using ngrok
+    application.run_webhook(
+        listen="0.0.0.0",
+        port=int(os.environ.get("PORT", 8080)),
+        webhook_url=os.environ.get("WEBHOOK_URL"),  # set this env var for local testing
+    )
