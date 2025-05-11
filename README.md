@@ -3,6 +3,7 @@
 Telegram bot to help you classify/know what dog breed from uploaded image/photo, and help you to give more information about the dog breed.
 The dog breed classification method is using API from this [repositry](https://github.com/divawidia/dog-breed-classification-api).
 For more detailed app description and deep learning model used for chatbot, can be seen [here](https://github.com/divawidia/Dog-Breed-Classification-Telegram-Bot)
+
 You can try this bot by cliking this
 
 [![Run Demo](https://img.shields.io/badge/Run-Demo-blue?logo=telegram)](https://t.me/deteksi_hewan_bot)
@@ -20,6 +21,12 @@ You can try this bot by cliking this
     <a href="https://www.python.org/"><img alt="Python v3.10.x" src="https://img.shields.io/badge/Python-v3.10.x-c2c330?style=for-the-badge&logo=python"></a>
     <a href="https://core.telegram.org/api"><img alt="Telegram Bot API" src="https://img.shields.io/badge/Telegram Bot Api-v7.4-24A2E0?style=for-the-badge&logo=telegram"></a>
     <a href="https://docs.python-telegram-bot.org/en/stable/index.html"><img alt="python-telegram-bot v21.3" src="https://img.shields.io/badge/python telegram bot-v21.3-24A2E0?style=for-the-badge&logo=telegram"></a>
+    <a href="https://cloud.google.com">
+        <img src="https://img.shields.io/badge/Google Cloud Platform-FFFFFF?style=for-the-badge&logo=googlecloud" alt="Cloud Run">
+    </a>
+    <a href="https://cloud.google.com/products/compute?hl=en">
+        <img src="https://img.shields.io/badge/Compute Engine-FFFFFF?style=for-the-badge&logo=googlecloud" alt="Cloud Run">
+    </a>
 </p>
 
 ## Features
