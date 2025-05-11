@@ -4,6 +4,7 @@ Telegram bot to help you classify/know what dog breed from uploaded image/photo,
 The dog breed classification method is using API from this [repositry](https://github.com/divawidia/dog-breed-classification-api).
 For more detailed app description and deep learning model used for chatbot, can be seen [here](https://github.com/divawidia/Dog-Breed-Classification-Telegram-Bot)
 You can try this bot by cliking this
+
 [![Run Demo](https://img.shields.io/badge/Run-Demo-blue?logo=telegram)](https://t.me/deteksi_hewan_bot)
 
 - Screenshot
